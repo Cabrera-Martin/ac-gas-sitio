@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="img/logo-icono.png">
+<title>AC Gas</title>
+<meta name="description" content="AC Gas — gasista matriculado en Montevideo y Canelones. Instalaciones de gas, reparaciones y mantenimiento, con matrícula y garantía.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a "caño amarillo" (yellow gas pipe) runs down the left of each section as the visual spine; black bands and flame-orange highlights taken from the AC Gas logo */
+:root {
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --ink: #14202e;
+  --muted: #536173;
+  --line: #d9e0e8;
+  --pipe: #f5c518;
+  --pipe-ink: #2a2100;
+  --flame: #e8501f;
+  --wa: #25d366;
+  --wa-ink: #ffffff;
+  --band: #000000;
+  --band-ink: #eef3f8;
+  --font-display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b131d; --surface: #121d2a; --ink: #e8eef5; --muted: #9aa8b8; --line: #23324a;
+    --pipe: #f5c12e; --pipe-ink: #1d1700; --flame: #ff7a3d; --band: #000000; --band-ink: #eef3f8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b131d; --surface: #121d2a; --ink: #e8eef5; --muted: #9aa8b8; --line: #23324a;
+  --pipe: #f5c12e; --pipe-ink: #1d1700; --flame: #ff7a3d; --band: #000000; --band-ink: #eef3f8;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+img { max-width: 100%; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+}
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.05; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(2rem, 5vw, 2.8rem); text-transform: uppercase; letter-spacing: .01em; }
+h3 { font-size: 1.45rem; }
+p { margin: 0; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--flame); outline-offset: 3px; }
+.eyebrow {
+  font-family: var(--font-mono); font-size: .78rem; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--muted);
+}
+.placeholder { background: color-mix(in srgb, var(--pipe) 30%, transparent); padding: 0 .25em; border-radius: 3px; }
+
+/* header */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--band); }
+header.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--band); color: var(--band-ink);
+  border-bottom: 4px solid var(--pipe);
+}
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo img { width: 34px; height: auto; flex: none; }
+.logo .ac { color: var(--pipe); }
+.logo span { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; letter-spacing: .02em; }
+nav { display: flex; gap: 20px; flex-wrap: wrap; }
+nav a { text-decoration: none; font-weight: 600; font-size: .95rem; opacity: .85; }
+nav a:hover { opacity: 1; color: var(--pipe); }
+@media (max-width: 640px) { nav { display: none; } }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; letter-spacing: .03em; text-transform: uppercase;
+  padding: 12px 20px; border-radius: 4px; text-decoration: none; border: 2px solid transparent; cursor: pointer;
+}
+.btn-pipe { background: var(--pipe); color: var(--pipe-ink); }
+.btn-pipe:hover { filter: brightness(1.06); }
+.btn-ghost { border-color: currentColor; color: var(--band-ink); background: transparent; }
+
+/* hero */
+.hero { background: var(--band); color: var(--band-ink); }
+.hero .wrap { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; padding-block: 64px 72px; }
+.hero h1 { font-size: clamp(2.8rem, 8vw, 5.2rem); font-weight: 800; text-transform: uppercase; }
+.hero h1 em { font-style: normal; color: var(--pipe); }
+.hero p.lead { margin-top: 18px; font-size: 1.15rem; max-width: 46ch; color: color-mix(in srgb, var(--band-ink) 82%, transparent); }
+.hero .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.hero .eyebrow { color: var(--pipe); margin-bottom: 14px; display: block; }
+.hero-side { display: grid; gap: 20px; justify-items: center; min-width: 0; }
+.hero-logo { width: min(260px, 70%); height: auto; }
+.badge-card { width: 100%;
+
+  border: 2px solid color-mix(in srgb, var(--band-ink) 25%, transparent); border-radius: 6px; padding: 22px;
+  font-family: var(--font-mono); font-size: .9rem; display: grid; gap: 12px;
+}
+.badge-card div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed color-mix(in srgb, var(--band-ink) 25%, transparent); padding-bottom: 10px; }
+.badge-card div:last-child { border-bottom: 0; padding-bottom: 0; }
+.badge-card b { color: var(--pipe); font-weight: 500; text-align: right; }
+@media (max-width: 800px) { .hero .wrap { grid-template-columns: 1fr; padding-block: 44px 52px; } }
+
+/* sections with pipe spine */
+section.block .wrap { padding-block: 72px; }
+.spine { border-left: 6px solid var(--pipe); padding-left: 18px; margin-bottom: 36px; display: grid; gap: 8px; }
+.spine p { color: var(--muted); max-width: 60ch; }
+
+.services { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.service { background: var(--surface); padding: 26px 22px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.service svg { width: 34px; height: 34px; color: var(--flame); }
+.service p { color: var(--muted); font-size: .98rem; }
+@media (max-width: 860px) { .services { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .services { grid-template-columns: 1fr; } }
+
+/* steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.steps li::before {
+  content: "Paso " counter(s); font-family: var(--font-mono); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--pipe-ink); background: var(--pipe); padding: 3px 8px; border-radius: 3px; justify-self: start;
+}
+.steps p { color: var(--muted); font-size: .98rem; }
+@media (max-width: 860px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .steps { grid-template-columns: 1fr; } }
+
+/* safety band */
+.safety { background: var(--band); color: var(--band-ink); }
+.safety .spine p { color: color-mix(in srgb, var(--band-ink) 75%, transparent); }
+.tips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.tips div { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.tips p { color: color-mix(in srgb, var(--band-ink) 75%, transparent); font-size: .98rem; }
+.tips h3 { color: var(--pipe); }
+@media (max-width: 760px) { .tips { grid-template-columns: 1fr; } }
+
+/* gallery placeholder */
+.gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.ph {
+  aspect-ratio: 1; max-width: 100%; border: 2px dashed var(--line); border-radius: 4px; display: grid; place-items: center; text-align: center;
+  color: var(--muted); font-family: var(--font-mono); font-size: .78rem; padding: 10px; background: var(--surface);
+}
+@media (max-width: 700px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* contact */
+.contact { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+.contact dl { margin: 0; display: grid; gap: 18px; }
+.contact dt { font-family: var(--font-mono); font-size: .78rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.contact dd { margin: 4px 0 0; font-size: 1.15rem; font-weight: 600; overflow-wrap: anywhere; }
+.cta-box { background: var(--surface); border: 1px solid var(--line); border-top: 6px solid var(--pipe); padding: 28px; display: grid; gap: 14px; }
+.cta-box p { color: var(--muted); }
+.cta-box .btn { justify-self: start; }
+@media (max-width: 760px) { .contact { grid-template-columns: 1fr; } }
+
+footer { border-top: 1px solid var(--line); }
+/* floating WhatsApp button */
+.wa-float {
+  position: fixed; z-index: 20;
+  right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--wa); color: var(--wa-ink); box-shadow: 0 4px 14px rgb(0 0 0 / .3);
+}
+.wa-float:hover { filter: brightness(1.06); }
+.wa-float svg { width: 32px; height: 32px; }
+
+footer .wrap { padding-block: 26px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="AC Gas, inicio">
+      <img src="img/logo-icono.png" alt="" width="34" height="35">
+      <span><b class="ac">AC</b> GAS</span>
+    </a>
+    <nav aria-label="Secciones">
+      <a href="#servicios">Servicios</a>
+      <a href="#como-trabajamos">Cómo trabajamos</a>
+      <a href="#seguridad">Seguridad</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Gasista matriculado · Montevideo y Canelones</span>
+        <h1>Instalaciones de gas <em>seguras</em> y en regla</h1>
+        <p class="lead">Instalación, reparación y habilitación de gas para casas, departamentos y comercios. Trabajos prolijos, con matrícula, planos y garantía.</p>
+        <div class="actions">
+          <a class="btn btn-pipe" href="#contacto">Pedir presupuesto</a>
+          <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+        </div>
+      </div>
+      <div class="hero-side"><img class="hero-logo" src="img/logo.jpg" alt="Logo de AC Gas" width="440" height="468">
+      <div class="badge-card" aria-label="Datos del profesional">
+        <div><span>Matrícula N°</span><b class="placeholder">[completar]</b></div>
+        <div><span>Categoría</span><b class="placeholder">[1ª / 2ª / 3ª]</b></div>
+        <div><span>Zona de trabajo</span><b>Montevideo y Canelones</b></div>
+        <div><span>Urgencias</span><b><a href="tel:+59899524106">099 524 106</a></b></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="servicios">
+    <div class="wrap">
+      <div class="spine">
+        <span class="eyebrow">Servicios</span>
+        <h2>Lo que hacemos</h2>
+        <p>Desde una conexión de cocina hasta la instalación completa de una obra nueva, con toda la documentación para la distribuidora.</p>
+      </div>
+      <div class="services">
+        <article class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12h7v-4h4v8h7"/><circle cx="10" cy="12" r="1.5"/></svg>
+          <h3>Instalaciones nuevas</h3>
+          <p>Cañerías de gas natural o envasado para viviendas, obras y locales, según normativa vigente.</p>
+        </article>
+        <article class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/></svg>
+          <h3>Planos y habilitaciones</h3>
+          <p>Planos, trámites y conexión ante la distribuidora. Altas de medidor y regularización de instalaciones.</p>
+        </article>
+        <article class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v4M5 10h14l-1 10H6z"/><path d="M9 14h6"/></svg>
+          <h3>Pruebas de hermeticidad</h3>
+          <p>Detección de pérdidas y prueba de la instalación con manómetro. Certificado del trabajo realizado.</p>
+        </article>
+        <article class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="14" r="3"/><path d="M9 7h6"/></svg>
+          <h3>Calefones, termotanques y calderas</h3>
+          <p>Colocación, conexión y mantenimiento de artefactos. Revisión de ventilaciones y conductos de evacuación.</p>
+        </article>
+        <article class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M7 9h10M7 13h6"/></svg>
+          <h3>Calefactores y cocinas</h3>
+          <p>Instalación de calefactores tiro balanceado, estufas y cocinas, con rejillas de ventilación reglamentarias.</p>
+        </article>
+        <article class="service">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4l-2.3 2.3-2.4-.6-.6-2.4z"/></svg>
+          <h3>Reparaciones y urgencias</h3>
+          <p>Olor a gas, artefactos que no encienden o corte del servicio. Diagnóstico y solución en el día cuando es posible.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="como-trabajamos" style="background: var(--surface); border-block: 1px solid var(--line);">
+    <div class="wrap">
+      <div class="spine">
+        <span class="eyebrow">Cómo trabajamos</span>
+        <h2>De la consulta a la habilitación</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Consulta</h3><p>Nos escribís por WhatsApp con fotos o una descripción del trabajo.</p></li>
+        <li><h3>Visita y presupuesto</h3><p>Revisamos la instalación y te pasamos un presupuesto claro, sin sorpresas.</p></li>
+        <li><h3>Trabajo</h3><p>Ejecutamos con materiales aprobados y dejamos todo limpio.</p></li>
+        <li><h3>Prueba y entrega</h3><p>Prueba de hermeticidad, documentación y garantía del trabajo.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block safety" id="seguridad">
+    <div class="wrap">
+      <div class="spine">
+        <span class="eyebrow" style="color: var(--pipe);">Seguridad</span>
+        <h2>Cuidá tu casa del monóxido</h2>
+        <p>El monóxido de carbono no tiene olor ni color. Estas tres cosas hacen la diferencia.</p>
+      </div>
+      <div class="tips">
+        <div><h3>Llama azul</h3><p>Si la llama de tus artefactos es amarilla o anaranjada, la combustión es incompleta. Pedí una revisión.</p></div>
+        <div><h3>Rejillas libres</h3><p>Nunca tapes las rejillas de ventilación, ni siquiera en invierno. Están por norma y salvan vidas.</p></div>
+        <div><h3>Revisión anual</h3><p>Hacé controlar calefones, calderas y calefactores una vez por año, antes de que empiece el frío.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="trabajos">
+    <div class="wrap">
+      <div class="spine">
+        <span class="eyebrow">Trabajos realizados</span>
+        <h2>Nuestro trabajo</h2>
+        <p>Algunas obras recientes. Más fotos en nuestro Instagram.</p>
+      </div>
+      <div class="gallery">
+        <div class="ph">Foto de trabajo 1</div>
+        <div class="ph">Foto de trabajo 2</div>
+        <div class="ph">Foto de trabajo 3</div>
+        <div class="ph">Foto de trabajo 4</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contacto" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="spine">
+        <span class="eyebrow">Contacto</span>
+        <h2>Pedí tu presupuesto</h2>
+      </div>
+      <div class="contact">
+        <dl>
+          <div><dt>WhatsApp</dt><dd><a href="https://wa.me/59899524106?text=Hola%2C%20quiero%20pedir%20un%20presupuesto" target="_blank" rel="noopener">099 524 106</a></dd></div>
+          <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/a.c.gas/" target="_blank" rel="noopener">@a.c.gas</a></dd></div>
+          <div><dt>Zona de cobertura</dt><dd>Montevideo y Canelones</dd></div>
+          <div><dt>Horario</dt><dd>9 a 18 h</dd></div>
+        </dl>
+        <div class="cta-box">
+          <h3>¿Sentís olor a gas?</h3>
+          <p>Cerrá la llave de paso, abrí puertas y ventanas y no accionés interruptores. Después escribinos o llamá a la guardia de tu distribuidora.</p>
+          <a class="btn btn-pipe" href="https://wa.me/59899524106?text=Hola%2C%20quiero%20pedir%20un%20presupuesto" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 AC Gas</span>
+    <span>Gasista matriculado · <span class="placeholder">[Matrícula N°]</span></span>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/59899524106?text=Hola%2C%20quiero%20pedir%20un%20presupuesto" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.23-9.43 9.43-9.43a9.37 9.37 0 0 1 9.42 9.44c0 5.2-4.23 9.42-9.44 9.42zm8.03-17.46A11.3 11.3 0 0 0 12.04.7C5.78.7.68 5.8.68 12.06c0 2 .52 3.96 1.52 5.68L.6 23.6l6-1.57a11.3 11.3 0 0 0 5.43 1.38h.01c6.26 0 11.36-5.1 11.36-11.36 0-3.03-1.18-5.89-3.33-8.03z"/></svg>
+</a>
+</body>
+</html>
